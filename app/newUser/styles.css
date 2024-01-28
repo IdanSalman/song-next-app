@@ -1,0 +1,16 @@
+body {
+  height: 90vh;
+  display: grid;
+  place-content: center;
+}
+#search-bar  input {
+  position: fixed;
+  top: 100px;
+  left: 40px;
+}
+
+#search-bar ul {
+  position: absolute;
+  top: 140px;
+  left: 0px;
+}
