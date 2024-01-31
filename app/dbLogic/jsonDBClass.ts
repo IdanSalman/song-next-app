@@ -29,6 +29,11 @@ class JsonDatabase {
         return (await readJsonFile(dbFilePath))[documentId]
     }
 
+    async createRecordById(tableName: string, jsonStringData: string, recordId: string) {
+        const dbFilePath = this.getPath(tableName)
+        return updateJsonFile(dbFilePath, jsonStringData) // TODO add recordId to function
+    }
+
     async createRecord(tableName: string, jsonStringData: string) {
         const dbFilePath = this.getPath(tableName)
         return updateJsonFile(dbFilePath, jsonStringData)
