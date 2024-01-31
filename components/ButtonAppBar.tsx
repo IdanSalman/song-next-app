@@ -1,4 +1,4 @@
-"use cliet"
+"use client"
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,7 +11,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import AccountMenu from './AccountMenu';
 import { useRouter } from 'next/navigation';
-import { useLoggedInContext } from '@/app/LoginContext';
 import { styled } from '@mui/material';
 
 type AppBarParams = {
@@ -23,9 +22,6 @@ type AppBarParams = {
 
 export default function MainButtonAppBar({ label, displayRegister, displayLogin, displayProfile }: AppBarParams) {
     const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
-
-
-    const { loggedIn, setLoggedIn } = useLoggedInContext();
     const [selected, setSelected] = React.useState(false);
     const { push } = useRouter();
     let registerButton = <Button onClick={() => { push(('/newUser/register')); }} color="inherit">Register</Button>

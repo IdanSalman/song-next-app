@@ -3,14 +3,17 @@ body {
   display: grid;
   place-content: center;
 }
+
 #search-bar  input {
   position: fixed;
+  width: 94.5%;
   top: 100px;
   left: 40px;
 }
 
 #search-bar ul {
   position: absolute;
+  width: 95%;
   top: 140px;
   left: 0px;
 }

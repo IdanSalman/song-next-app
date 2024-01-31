@@ -16,7 +16,7 @@ import { useLoggedInContext } from '@/app/LoginContext';
 // Cool - https://mui.com/material-ui/react-divider/#system-ListDividers.tsx
 
 export default function AccountMenu() {
-  const { loggedIn, setLoggedIn } = useLoggedInContext()
+  const { setLoggedIn } = useLoggedInContext()
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,7 +26,7 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
   const handleCloseLogout = () => {
-    setLoggedIn(!loggedIn)
+    setLoggedIn(false)
     setAnchorEl(null);
   };
   return (

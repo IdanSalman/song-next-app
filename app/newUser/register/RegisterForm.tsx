@@ -1,7 +1,7 @@
 "use client"
-import { useLoggedInContext } from "@/app/LoginContext";
 import { useRouter } from "next/navigation";
 import { LoginFormElements } from "../login/LoginForm";
+import getJsonDB from "@/app/dbLogic/jsonDBClass";
 
 
 // Inspired from https://stackoverflow.com/questions/56322667/how-to-type-a-form-component-with-onsubmit
@@ -15,21 +15,18 @@ interface RegisterFormElement extends HTMLFormElement {
 
 export default function RegisterForm() {
     const { push } = useRouter();
-    const { loggedIn, setLoggedIn } = useLoggedInContext();
-    if (loggedIn) {
-        push("/")
-    }
 
-    const handleFormSubmit = (e: React.FormEvent<RegisterFormElement>) => {
-        // TODO Update this function later...
-        // Need to check from the appropriate db table if:
-        // username's db password equals hash(password)
-
+    function handleFormSubmit(e: React.FormEvent<RegisterFormElement>) {
         e.preventDefault()
         let username = e.currentTarget.elements["input-user"].value
         let password = e.currentTarget.elements["input-pass"].value
 
         if (username != "" && password != "") {
+            const insertData = async () => {
+                console.log("Reached inside")
+                await getJsonDB().createRecord("users", '{ "username":"' + username + '", "password": "' + await getJsonDB().hashString(password) + '" }')
+            }
+            insertData()
             push("/newUser/login")
         }
     }

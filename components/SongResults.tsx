@@ -10,7 +10,7 @@ export default function SongResults({ songList }: SongLists) {
 
     return <ul>
         {songList.map(songData => {
-            return <SongResult {...songData} />
+            return <SongResult key={songData.id} {...songData} />
         })}
     </ul>;
 }

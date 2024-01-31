@@ -30,6 +30,9 @@ export function BasicCard({ artist, album, name, price }: Song) {
     );
 }
 
+export interface SongDbRecord {
+    [id: string]: Song;
+}
 
 export type Song = {
     id: string;

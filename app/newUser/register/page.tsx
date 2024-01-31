@@ -1,6 +1,6 @@
 "use client"
 import "../DataForm.css";
-import "../styles.css";
+import "@/app/styles.css";
 import MainButtonAppBar from '@/components/ButtonAppBar';
 import RegisterForm from "./RegisterForm";
 

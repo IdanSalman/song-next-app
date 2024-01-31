@@ -1,7 +1,17 @@
-import { Song } from "../../components/Song";
+import { Song, SongDbRecord } from "../../components/Song";
 
+function dictToList(songDict: SongDbRecord) {
+    let songList = []
+    for (var key in songDict) {
+        var value = songDict[key];
+        songList.push(value)
+    }
+
+    return songList
+}
 
 export default function filterSongs(songsOptions: Song[], searchText: string, maxResults: number) {
+
     let result = songsOptions.filter(
         x => {
             if (x.album.toLowerCase().includes(searchText.toLowerCase()))
