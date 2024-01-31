@@ -1,7 +1,7 @@
 "use client"
+import { verifyString } from "@/app/dbLogic/utils";
 import { useLoggedInContext } from "@/app/LoginContext";
-import getJsonDB from "@/app/dbLogic/jsonDBClass";
-import { dictToList } from "@/app/page";
+import { findUser } from "@/drizzle";
 import { useRouter } from "next/navigation";
 
 // Inspired from https://stackoverflow.com/questions/56322667/how-to-type-a-form-component-with-onsubmit
@@ -25,17 +25,11 @@ export default function LoginForm() {
         if (username != "" && password != "") {
             const insertData = async () => {
                 console.log("Reached inside")
-                const results = (await getJsonDB().findAll("users"))
-                console.log(results)
-                let result = dictToList(results).filter((user: { username: string, password: string }) => {
-                    if (user.username == username)
-                        return true
-                    return false
-                })[0]
+                const result = (await findUser(username))
                 if (result == undefined || result.length == 0) {
                     console.log("Unknown username, consider registering")
                 }
-                else if (await getJsonDB().verifyHashedString(result.password, password)) {
+                else if (await verifyString(result[0].password, password)) {
                     console.log("Correct password")
                     setLoggedIn(true)
                     push("/")

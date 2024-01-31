@@ -1,10 +1,10 @@
-import { Song, BasicCard } from "./Song";
+import { BasicCard } from "./Song";
 
 function handleCart(songID: string) {
 
 } // TODO Implement me
 
-export default function SongResult(songData: Song) {
+export default function SongResult(songData: any) {
     let songID = songData.id
 
     return <>

@@ -12,6 +12,7 @@ import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import AccountMenu from './AccountMenu';
 import { useRouter } from 'next/navigation';
 import { styled } from '@mui/material';
+import CartMenu from './CartMenu';
 
 type AppBarParams = {
     label: string;
@@ -37,15 +38,7 @@ export default function MainButtonAppBar({ label, displayRegister, displayLogin,
     </div>
     if (displayProfile) // User is logged in
         userData = <>
-            <ToggleButton
-                value="check"
-                selected={selected}
-                onChange={() => {
-                    setSelected(!selected);
-                }}
-            >
-                <LocalGroceryStoreIcon />
-            </ToggleButton>
+            <CartMenu />
             <AccountMenu />
         </>
 

@@ -1,7 +1,9 @@
 "use client"
+import getJsonDB from "@/app/dbLogic/jsonDBClass";
 import { useRouter } from "next/navigation";
 import { LoginFormElements } from "../login/LoginForm";
-import getJsonDB from "@/app/dbLogic/jsonDBClass";
+import { hashString } from "@/app/dbLogic/utils";
+import { addUser } from "@/drizzle";
 
 
 // Inspired from https://stackoverflow.com/questions/56322667/how-to-type-a-form-component-with-onsubmit
@@ -23,8 +25,7 @@ export default function RegisterForm() {
 
         if (username != "" && password != "") {
             const insertData = async () => {
-                console.log("Reached inside")
-                await getJsonDB().createRecord("users", '{ "username":"' + username + '", "password": "' + await getJsonDB().hashString(password) + '" }')
+                await addUser(username, await hashString(password), 'c')
             }
             insertData()
             push("/newUser/login")

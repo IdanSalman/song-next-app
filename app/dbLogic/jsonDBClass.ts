@@ -1,5 +1,9 @@
-import { readJsonFile, createJsonFile, updateJsonFile, hashString, verifyString } from './utils';
-
+/**
+ * This file is currently not in use however
+ * it is still usable except for createRecordById()
+ * and notice that you should change the path you send
+ */
+import { readJsonFile, updateJsonFile } from './utils';
 
 class JsonDatabase {
     private static _instance: JsonDatabase; // Implements a Singleton Design Pattern.
@@ -39,22 +43,9 @@ class JsonDatabase {
         return updateJsonFile(dbFilePath, jsonStringData)
     }
 
-    async createDb(tableName: string, jsonStringData: string) {
-        const dbFilePath = this.getPath(tableName)
-        return createJsonFile(dbFilePath, jsonStringData)
-    }
-
     async findAll(tableName: string) {
         // Implement logic to retrieve all entities from a database
         return (await this.queryTable(tableName))
-    }
-
-    async hashString(item: string) {
-        return (await hashString(item))
-    }
-
-    async verifyHashedString(item: string, hash: string) {
-        return (await verifyString(item, hash))
     }
 
     public static get Instance() {

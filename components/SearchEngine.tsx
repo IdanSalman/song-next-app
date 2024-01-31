@@ -1,33 +1,45 @@
 "use client"
 import "@/app/styles.css"
 import SongResults from "./SongResults";
-import filterSongs from "../app/songs/filterSongs";
-import { Song } from "./Song";
 import { ChangeEvent, useState } from "react";
+import { findAllTracksFiltered } from "@/drizzle";
 
 const MAX_RESULTS = 10;
-
+interface LoginFormElements extends HTMLFormControlsCollection {
+    "message-submit": HTMLInputElement
+}
+interface LoginFormElement extends HTMLFormElement {
+    readonly elements: LoginFormElements
+}
 // TODO https://medium.com/@jamischarles/what-is-debouncing-2505c0648ff1 
 // Add Debouncing to the song filter.
 
-type SongRequest = {
-    songList: Song[]
-}
+export default function SearchEngine() {
+    const [data, setData] = useState<any[]>([]);
 
-export default function SearchEngine({ songList }: SongRequest) {
-    const [message, setMessage] = useState<string>('');
-
-
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setMessage(event.target.value);
-
-        console.log('value is:', event.target.value);
+    const fetchData = async (message: string) => {
+        const results = await findAllTracksFiltered(message)
+        if (results.length > MAX_RESULTS)
+            results.slice(0, MAX_RESULTS)
+        return results
     };
 
-    let filteredSongList = filterSongs(songList, message, MAX_RESULTS);
+    // TODO Change to onSubmit instead :)
+    const handleFormSubmit = (e: React.FormEvent<LoginFormElement>) => {
+        e.preventDefault()
+        let message = e.currentTarget.elements["message-submit"].value
+
+        fetchData(message).then((result) => {
+            setData(result)
+        })
+    };
+
+    let filteredSongList = data
     return (
         <div id="search-bar">
-            <input type="text" name="searchBar" onChange={handleChange} />
+            <form onSubmit={handleFormSubmit}>
+                <input id="message-submit" type="text" name="searchBar" />
+            </form>
             <SongResults songList={filteredSongList} />
         </div>
     );
