@@ -1,7 +1,7 @@
 "use client"
 import "@/app/styles.css"
 import SongResults from "./SongResults";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { findAllTracksFiltered } from "@/drizzle";
 
 const MAX_RESULTS = 10;
@@ -23,6 +23,10 @@ export default function SearchEngine() {
             results.slice(0, MAX_RESULTS)
         return results
     };
+    if (data.length == 0)
+        fetchData("").then((result) => {
+            setData(result)
+        })
 
     // TODO Change to onSubmit instead :)
     const handleFormSubmit = (e: React.FormEvent<LoginFormElement>) => {

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -32,7 +32,7 @@ export default function CartMenu() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <LocalGroceryStoreIcon sx={{ width: 32, height: 32 }} />
+                        <LibraryMusicIcon sx={{ width: 32, height: 32 }} />
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -75,6 +75,7 @@ export default function CartMenu() {
                     <ListItemIcon>
                         <Settings fontSize="small" />
                     </ListItemIcon>
+                    Settings
                 </MenuItem>
             </Menu>
         </React.Fragment>
