@@ -3,6 +3,7 @@ import * as Schema from './schema'
 import Database from 'better-sqlite3'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 import { eq, sql } from 'drizzle-orm';
+import SongResult from '@/components/SongResult';
 
 // TODO Change the path to be dynamic (and accurate, it refers to .next folder sometimes).
 const database = new Database("C:/Users/SHarush/Desktop/Projects/song-next-app/chinook.db")
@@ -97,5 +98,24 @@ export async function addUser(
         password: password,
         userType: userType,
         matchedId: matchedId,
+    })
+}
+
+
+export async function addToCart(
+    username: string,
+    songId: string,
+) {
+    // TODO Finish implementing
+    // My idea is to have a stringified list of the song ids added to cart
+    const results = db.select({ songList: Schema.carts.songList }).from(Schema.carts).where(eq(Schema.carts.username, username))
+
+    let songIdList = results.songList.split(",");
+    songIdList.push(songId)
+    songIdList = songIdList.join(",")
+
+    await db.insert(Schema.carts).values({
+        username: username,
+        songList: songIdList,
     })
 }

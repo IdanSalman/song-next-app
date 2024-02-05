@@ -1,7 +1,5 @@
 "use server"
-import * as fs from 'fs';
 import * as argon2 from 'argon2';
-import { v4 as uuidv4 } from 'uuid';
 
 export interface DbTableDict {
     [id: string]: any;
@@ -17,6 +15,7 @@ export async function verifyString(text: string, hashedItem: string) {
     return isValid;
 }
 
+/**
 export async function updateJsonFile(filePath: string, content: string): Promise<void> {
     const documentId = uuidv4()
     try {
@@ -59,3 +58,4 @@ export async function createJsonFile(filePath: string, content: string): Promise
 export async function readJsonFile(filePath: string) {
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
 }
+ */

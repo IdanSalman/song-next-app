@@ -4,9 +4,16 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { addToCart } from '@/drizzle';
+import { getSessionData } from '@/app/cookiesLogic/actions';
+
+async function handleCart(songID: string) {
+    const username = JSON.parse(await getSessionData() as string).username
+    addToCart(username, songID)
+} // TODO Implement me
 
 
-export function BasicCard({ artist, album, name, price }: Song) {
+export function BasicCard({ id, artist, album, name, price }: Song) {
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
@@ -24,7 +31,7 @@ export function BasicCard({ artist, album, name, price }: Song) {
                 {price}$
             </Typography>
             <CardActions>
-                <Button size="small">Add to cart</Button>
+                <Button onClick={() => handleCart(id)} size="small">Add to cart</Button>
             </CardActions>
         </Card >
     );

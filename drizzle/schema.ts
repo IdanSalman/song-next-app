@@ -154,3 +154,19 @@ export var users = sqliteTable("users", {
 			ifkUserCustomerId: index("IFK_UserMatchedId").on(table.matchedId),
 		}
 	});
+
+/**
+ * TODO Correct the table data
+export var carts = sqliteTable("carts", {
+	userId: integer("UserId").primaryKey({ autoIncrement: true }).notNull(),
+	username: numeric("Username").notNull(),
+	password: numeric("Password").notNull(),
+	userType: numeric("UserType").notNull(),
+	matchedId: integer("MatchedId").references(() => customers.customerId || employees.employeeId),
+},
+	(table) => {
+		return {
+			ifkUserCustomerId: index("IFK_UserMatchedId").on(table.matchedId),
+		}
+	});
+ */

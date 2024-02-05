@@ -1,5 +1,4 @@
 "use client"
-import getJsonDB from "@/app/dbLogic/jsonDBClass";
 import { useRouter } from "next/navigation";
 import { LoginFormElements } from "../login/LoginForm";
 import { hashString } from "@/app/dbLogic/utils";
@@ -31,7 +30,9 @@ export default function RegisterForm() {
             push("/newUser/login")
         }
     }
-    return <form onSubmit={handleFormSubmit}>
+    // TODO Add tailwind that functions properly
+    return <form className={"register-form"} onSubmit={handleFormSubmit}>
+        <div className={"titleContainer"}>Register</div>
         <label htmlFor="username">Username:</label>
         <input
             id="input-user"
@@ -42,6 +43,6 @@ export default function RegisterForm() {
             type="password" />
         <input
             type="submit"
-            value={"Register"} />
+            value={"REGISTER"} />
     </form>
 }

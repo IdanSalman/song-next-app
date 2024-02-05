@@ -1,5 +1,6 @@
-import UserButton from "@/components/UserButton"
 import { LoggedInProvider } from "./LoginContext"
+import MainButtonAppBar from "@/components/ButtonAppBar"
+
 
 export const metadata = {
   title: 'Song App',
@@ -11,8 +12,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     <html lang="en">
       <body>
         <LoggedInProvider>
+          <MainButtonAppBar />
           {children}
-          {/* <UserButton /> */}
         </LoggedInProvider>
       </body>
     </html>

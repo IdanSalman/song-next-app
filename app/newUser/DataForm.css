@@ -1,64 +1,29 @@
 #newUser-form {
-    width: 400px;
-    max-width: 100%;
-    margin: 50px auto;
-    background-color: lightblue;
-    border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    font-family: "Poppins", sans-serif;
-  }
-  
-  #newUser-form h1 {
-    text-align: center;
-    margin: 0;
-    padding: 20px 0;
-    font-size: 28px;
-    font-weight: bold;
-    color: white;
-  }
-  
-  #newUser-form form {
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  #newUser-form form label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: gray;
-    font-family: "Poppins", sans-serif;
-  }
-  
-  #newUser-form form input[type="text"],
-  #newUser-form form input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid lightgray;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
-  
-  #newUser-form form input[type="submit"] {
-    width: 100%;
-    padding: 12px;
-    background-color: dodgerblue;
-    border: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  #newUser-form form input[type="submit"]:hover {
-    background-color: deepskyblue;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  }
-  
+  @apply w-[400px] max-w-full bg-[lightblue] shadow-[0_10px_20px_rgba(0,0,0,0.1)] mx-auto my-[50px] rounded-[10px] font-sans;
+}
+#newUser-form h1 {
+  @apply text-center text-[28px] font-[bold] text-[white] m-0 px-0 py-5;
+}
+#newUser-form form {
+  @apply bg-[white] p-5 rounded-[10px] font-sans;
+}
+#newUser-form form label {
+  @apply block text-sm text-[gray] mb-2 font-sans;
+}
+#newUser-form form input[type="text"],
+#newUser-form form input[type="password"] {
+  @apply w-full border text-base box-border mb-5 p-3 rounded-[5px] border-solid border-[lightgray];
+}
+#newUser-form form input[type="submit"] {
+  @apply w-full bg-[dodgerblue] text-[white] text-base font-[bold] cursor-pointer transition-[background-color] duration-[0.3s] ease-[ease] p-3 border-none hover:bg-[deepskyblue];
+}
+.titleContainer {
+  @apply flex flex-col text-[34px] font-bold items-center justify-center pb-2;
+}
+.login-form{
+  @apply bg-batman-pepe
+}
+
+.register-form{
+  @apply bg-gato
+}

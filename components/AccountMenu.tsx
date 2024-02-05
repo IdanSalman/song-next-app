@@ -12,6 +12,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useLoggedInContext } from '@/app/LoginContext';
+import { deleteSessionData } from '@/app/cookiesLogic/actions';
 
 // Link - https://mui.com/material-ui/react-menu/#system-AccountMenu.tsx
 // Cool - https://mui.com/material-ui/react-divider/#system-ListDividers.tsx
@@ -26,7 +27,8 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleCloseLogout = () => {
+  const handleCloseLogout = async () => {
+    await deleteSessionData()
     setLoggedIn(false)
     setAnchorEl(null);
   };

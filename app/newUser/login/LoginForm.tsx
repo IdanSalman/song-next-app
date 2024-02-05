@@ -1,4 +1,5 @@
 "use client"
+import { handleLogin } from "@/app/cookiesLogic/actions";
 import { verifyString } from "@/app/dbLogic/utils";
 import { useLoggedInContext } from "@/app/LoginContext";
 import { findUser } from "@/drizzle";
@@ -32,6 +33,7 @@ export default function LoginForm() {
                 else if (await verifyString(result[0].password, password)) {
                     console.log("Correct password")
                     setLoggedIn(true)
+                    handleLogin(JSON.stringify(result[0]))
                     push("/")
                 }
                 else
@@ -40,7 +42,9 @@ export default function LoginForm() {
             insertData()
         }
     }
-    return <form onSubmit={handleFormSubmit}>
+    // TODO Add tailwind that functions properly
+    return <form className={"login-form"} onSubmit={handleFormSubmit}>
+        <div className={"titleContainer"}>Login</div>
         <label htmlFor="username">Username:</label>
         <input
             id="input-user"
@@ -51,6 +55,6 @@ export default function LoginForm() {
             type="password" />
         <input
             type="submit"
-            value={"Log In"} />
+            value={"LOGIN"} />
     </form>
 }

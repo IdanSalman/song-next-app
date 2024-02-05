@@ -6,37 +6,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import ToggleButton from '@mui/material/ToggleButton';
 import HomeIcon from '@mui/icons-material/Home';
-import LocalGroceryStoreIcon from '@mui/icons-material/LocalGroceryStore';
 import AccountMenu from './AccountMenu';
+import CartMenu from './CartMenu';
 import { useRouter } from 'next/navigation';
 import { styled } from '@mui/material';
-import CartMenu from './CartMenu';
+import { useLoggedInContext } from '@/app/LoginContext';
 
-type AppBarParams = {
-    label: string;
-    displayRegister: boolean;
-    displayLogin: boolean;
-    displayProfile: boolean;
-};
+export default function MainButtonAppBar() {
+    const { loggedIn } = useLoggedInContext()
+    const Offset = styled('div')(({ theme }) => theme.mixins.toolbar)
+    const { push } = useRouter()
 
-export default function MainButtonAppBar({ label, displayRegister, displayLogin, displayProfile }: AppBarParams) {
-    const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
-    const [selected, setSelected] = React.useState(false);
-    const { push } = useRouter();
     let registerButton = <Button onClick={() => { push(('/newUser/register')); }} color="inherit">Register</Button>
     let loginButton = <Button onClick={() => { push(('/newUser/login')); }} color="inherit">Login</Button>
-    if (displayRegister == false)
-        registerButton = <></>
-    if (displayLogin == false)
-        loginButton = <></>
-
     let userData = <div>
         {registerButton}
         {loginButton}
     </div>
-    if (displayProfile) // User is logged in
+    if (loggedIn) // User is logged in
         userData = <>
             <CartMenu />
             <AccountMenu />
@@ -45,7 +33,7 @@ export default function MainButtonAppBar({ label, displayRegister, displayLogin,
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="fixed">
-                <Toolbar>
+                <Toolbar sx={{ flexGrow: 1 }} variant='regular'>
                     <IconButton
                         size="large"
                         edge="start"
@@ -56,9 +44,7 @@ export default function MainButtonAppBar({ label, displayRegister, displayLogin,
                     >
                         <HomeIcon />
                     </IconButton>
-                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                        {label}
-                    </Typography>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
                     {userData}
                 </Toolbar>
             </AppBar>
