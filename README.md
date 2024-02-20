@@ -1,2 +1,3 @@
 # song-next-app
-TODO ADD DOCS
+npm install
+npm dev
